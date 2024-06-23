@@ -1,28 +1,52 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { CateContext } from '../contexts/CategoryContext';
+import NewCardsHolder from './NewCardsHolder';
 
-export default class LowerNav extends Component {
-    constructor(){
-        super();
-        this.state={
-            cat1:'Daily',
-            cat2:'Movies',
-            cat3:'Sports',
-            cat4:'Politics',
-            cat5:'International'
-        }
-    }
+export default function LowerNav() {
 
-  render() {
-    return (
-      <>
-        <nav className="nav nav-pills flex-column flex-sm-row bg-dark my-1">
-  <a className="flex-sm-fill text-sm-center nav-link text-warning" href="/">{this.state.cat1}</a>
-  <a className="flex-sm-fill text-sm-center nav-link text-warning" href="/">{this.state.cat2}</a>
-  <a className="flex-sm-fill text-sm-center nav-link text-warning" href="/">{this.state.cat3}</a>
-  <a className="flex-sm-fill text-sm-center nav-link text-warning" href="/">{this.state.cat4}</a>
-  <a className="flex-sm-fill text-sm-center nav-link text-warning" href="/">{this.state.cat5}</a>
-</nav>
-      </>
-    )
+  const [activeCat, setactiveCat] = useState('General')
+
+  const [category, setCategory] = useState({
+    cat1: 'Business',
+    cat2: 'Entertainment',
+    cat3: 'Sports',
+    cat4: 'Technology',
+    cat5: 'Health'
+  });
+
+  const handleCatChange = (e) =>{
+    // e.preventDefault()
+    let newCat = e.target.innerHTML.toLowerCase()
+    setactiveCat(newCat)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' 
+    });
+
   }
+
+  return (
+    <>
+      <CateContext.Provider value={activeCat}>
+
+
+        <nav className="nav sticky-md-top nav-pills flex-column flex-sm-row bg-dark my-1">
+
+          <NavLink onClick={handleCatChange} className="flex-sm-fill text-sm-center nav-link  text-warning" to="/Business">{category.cat1}</NavLink>
+
+          <NavLink onClick={handleCatChange} className="flex-sm-fill text-sm-center nav-link text-warning" to="/Entertainment">{category.cat2}</NavLink>
+
+          <NavLink onClick={handleCatChange} className="flex-sm-fill text-sm-center nav-link text-warning" to="/Sports">{category.cat3}</NavLink>
+
+          <NavLink onClick={handleCatChange} className="flex-sm-fill text-sm-center nav-link text-warning" to="/Technology">{category.cat4}</NavLink>
+
+          <NavLink onClick={handleCatChange} className="flex-sm-fill text-sm-center nav-link text-warning" to="/Health">{category.cat5}</NavLink>
+        </nav>
+
+        <NewCardsHolder/>
+      </CateContext.Provider>
+    </>
+  )
+
 }

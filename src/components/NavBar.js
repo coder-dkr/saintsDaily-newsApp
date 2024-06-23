@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import '../App.css';
 
 export default class NavBar extends Component {
   render() {
@@ -13,20 +14,62 @@ export default class NavBar extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0 list-unstyled">
-                <li className="nav-item">
+                <li className="list-unstyled mx-2 mt-1 p-fixed">
+
                   <NavLink className={({ isActive, isPending }) =>
-                    isPending ? "pending my-3 text-gray  " : isActive ? "active nav-link text-white" : ""
-                  } aria-current="page" to="/home">{this.props.home}</NavLink>
+                    isPending ? "pending" : isActive ? "active text-warning " : "text-white"} 
+                  style={(isActive,isPending)=>{
+
+                    return {
+                      margin : "0 20px",
+                      fontWeight : "bold",
+                      listStyle:"none",
+                      textDecoration:"none"}
+                    }
+
+                      
+                  }
+                    
+                    aria-current="page" to="/">{this.props.home}</NavLink>
+                  
                 </li>
-                <li className="nav-item">
+                <li className="nav-item mx-2 mt-1 p-fixed">
                   <NavLink className={({ isActive, isPending }) =>
-                    isPending ? "pending   " : isActive ? "active nav-link text-white" : ""
-                  }  to="/about">{this.props.about}</NavLink>
+                    isPending ? "pending" : isActive ? "active text-warning " : "text-white"} 
+                  style={(isActive,isPending)=>{
+
+                    return {
+                      margin : "0 20px",
+                      fontWeight : "bold",
+                      listStyle:"none",
+                      textDecoration:"none"}
+                    }
+
+                      
+                  }
+                  to="/about">{this.props.about}</NavLink>
                 </li>
-                <li className="nav-item">
+
+                <li className="nav-item mx-2 mt-1 p-fixed">
+
+
                   <NavLink className={({ isActive, isPending }) =>
-                    isPending ? "pending]  " : isActive ? "active nav-link text-white" : ""
-                  } to="/more">{this.props.more}</NavLink>
+                    isPending ? "pending" : isActive ? "active text-warning " : "text-white"} 
+                  style={(isActive,isPending)=>{
+
+                    return {
+                      margin : "0 20px",
+                      fontWeight : "bold",
+                      listStyle:"none",
+                      textDecoration:"none"}
+                    }
+
+                      
+                  }
+
+                  to="/more">{this.props.more}</NavLink>
+
+
                 </li>
               </ul>
               <form className="d-flex" role="search">
