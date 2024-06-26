@@ -6,36 +6,36 @@ import { CateContext } from '../contexts/CategoryContext'
 export default function NewCardsHolder ()  {
     const [newsData, setnewsData] = useState()
         
-
+    const ApiKeyed = '952f24549e434ae7a323bee25cfd9399'
 
     const [page, setpage] = useState(1)
 
     const [pageitemNum, setpageitemNum] = useState(12)
 
-    const [sluglink, setsluglink] = useState('top-headlines?country=in&category=general&pageSize=12&page=1')
+    // const [sluglink, setsluglink] = useState('top-headlines?country=in&category=general&pageSize=12&page=1')
 
 
     const updateCategory = useContext(CateContext)
 
     useEffect(()=>{
         async function FetchData(){
-        let linkee = `https://newsapi.org/v2/top-headlines?country=in&category=${updateCategory}&pageSize=12&page=${page}&apiKey=952f24549e434ae7a323bee25cfd9399`
+        let linkee = `https://newsapi.org/v2/top-headlines?country=in&category=${updateCategory}&pageSize=12&page=${page}&apiKey=${ApiKeyed}`
           let a = await fetch(linkee).then(
                 response => response.json()
             ).then(
                 data => {
                     setnewsData(data.articles);
-                    setpageitemNum(data.articles.length)
+                    // setpageitemNum(data.articles.length)
                     
                 }
             )
             
-            let slugpre = linkee.split('v2/')[1]
-            setsluglink(slugpre.split('&apiKey')[0])
-            console.log(sluglink)
+            // let slugpre = linkee.split('v2/')[1]
+            // setsluglink(slugpre.split('&apiKey')[0])
+            // console.log(sluglink)
         }
         FetchData()
-    },[page,updateCategory,sluglink]);
+    },[page,updateCategory]);
 
  
     return (
@@ -53,7 +53,7 @@ export default function NewCardsHolder ()  {
          }
 
     </div>
-    <div className="container d-flex justify-content-lg-between my-4">
+    <div className="container w-100 d-flex gap-4 justify-content-lg-between my-4">
     <button onClick={()=>{
         setpage(page-1)
         window.scrollTo({
