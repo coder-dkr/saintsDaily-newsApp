@@ -1,14 +1,41 @@
-import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import React,{useState , useRef} from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import '../App.css';
+import LowerNav from './LowerNav';
+import { ApiKeyContext } from '../contexts/ApiKeyContext'
 
-export default class NavBar extends Component {
-  render() {
+
+export default function NavBar (props) { 
+  const [apiKeyvalue, setapiKeyvalue] = useState()
+
+  const [EnteredApiKey, SetEnteredApiKey] = useState()
+  
+  const ApiKeyInputRef = useRef()
+  
+  const handleChange = (e) =>{
+    setapiKeyvalue(e.target.value)
+  }
+
+  const handleKeySubmit = (e) => {
+    e.preventDefault()
+    SetEnteredApiKey(ApiKeyInputRef.current.value)
+  }
+
+  const Navigate  = useNavigate()
+  const handleGetApiKey = () => {
+    window.open('https://newsapi.org/register','_blank')
+    Navigate('/')
+
+  }
+
+
+  
     return (
       <>
+     <ApiKeyContext.Provider value={EnteredApiKey}>
         <nav className="navbar navbar-expand-lg bg-dark bg-gradient">
           <div className="container-fluid">
-            <a className="navbar-brand text-light" href="/">{this.props.title}</a>
+            <a className="navbar-brand text-light" href="/">{props.title}</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -30,7 +57,7 @@ export default class NavBar extends Component {
                       
                   }
                     
-                    aria-current="page" to="/">{this.props.home}</NavLink>
+                    aria-current="page" to="/home">{props.home}</NavLink>
                   
                 </li>
                 <li className="nav-item mx-2 mt-1 p-fixed">
@@ -47,10 +74,10 @@ export default class NavBar extends Component {
 
                       
                   }
-                  to="/about">{this.props.about}</NavLink>
+                  to="/about">{props.about}</NavLink>
                 </li>
 
-                <li className="nav-item mx-2 mt-1 p-fixed">
+                <li onClick={handleGetApiKey} className="nav-item mx-2 mt-1 p-fixed">
 
 
                   <NavLink className={({ isActive, isPending }) =>
@@ -67,21 +94,21 @@ export default class NavBar extends Component {
                       
                   }
 
-                  to="/more">{this.props.more}</NavLink>
+                  to="/register-apikey">{props.more}</NavLink>
 
 
                 </li>
               </ul>
               <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success text-light" type="submit">search</button>
+                <input ref={ApiKeyInputRef} value={apiKeyvalue} onChange={handleChange}   className="form-control me-2" type="text" placeholder="Input Your Api Key" aria-label="Search" />
+                <button onClick={handleKeySubmit} className="btn btn-outline-success text-light" type="submit">Submit</button>
               </form>
             </div>
           </div>
         </nav>
-
-
+     <LowerNav/>
+    </ApiKeyContext.Provider>
       </>
     )
-  }
+  
 }

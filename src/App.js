@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import NavBar from './components/NavBar';
-import LowerNav from './components/LowerNav';
+import About from './components/About';
 
 
 import {
@@ -16,18 +16,27 @@ export default function App() {
     <>
     <Router>
 
-      <NavBar title="Saint's Daily" home="Home" about="About" more="More"/>
 
       <Routes>
-        <Route exact path="/" element={<LowerNav/>}/>
-        <Route exact path="/" element={<LowerNav/>}/>
-        <Route exact path="/Business" element={<LowerNav/>}/>
-        <Route exact path="/Entertainment" element={<LowerNav/>}/>
-        <Route exact path="/Sports" element={<LowerNav/>}/>
-        <Route exact path="/Technology" element={<LowerNav/>}/>
-        <Route exact path="/Health" element={<LowerNav/>}/>
+        
+        <Route exact path="/" element={<NavBar title="Saint's Daily" home="Home" about="About" more="Get Api Key"/>}/>
+        
+        <Route exact path="/home" element={<NavBar title="Saint's Daily" home="Home" about="About" more="Get Api Key"/>}/>
 
-        <Route exact path="/about" element={<div className='container'>I am About</div>}/>
+        <Route exact path="/Business" element={<NavBar title="Saint's Daily" home="Home" about="About" more="Get Api Key"/>}/>
+
+        <Route exact path="/Entertainment" element={<NavBar title="Saint's Daily" home="Home" about="About" more="Get Api Key"/>}/>
+
+        <Route exact path="/Sports" element={<NavBar title="Saint's Daily" home="Home" about="About" more="Get Api Key"/>}/>
+
+        <Route exact path="/Technology" element={<NavBar title="Saint's Daily" home="Home" about="About" more="Get Api Key"/>}/>
+
+        <Route exact path="/Health" element={<NavBar title="Saint's Daily" home="Home" about="About" more="Get Api Key"/>}/>
+
+        <Route exact path="/about" element={<About/>}/>
+
+
+
       </Routes>
 
     </Router>

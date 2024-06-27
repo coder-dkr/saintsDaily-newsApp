@@ -1,21 +1,18 @@
 import React, { Component,useEffect ,useState,useContext} from 'react'
 import NewsCard from './NewsCard'
 import { CateContext } from '../contexts/CategoryContext'
+import { ApiKeyContext } from '../contexts/ApiKeyContext'
 
 
 export default function NewCardsHolder ()  {
     const [newsData, setnewsData] = useState()
         
-    const ApiKeyed = '952f24549e434ae7a323bee25cfd9399'
-
     const [page, setpage] = useState(1)
-
+    
     const [pageitemNum, setpageitemNum] = useState(12)
-
-    // const [sluglink, setsluglink] = useState('top-headlines?country=in&category=general&pageSize=12&page=1')
-
-
-    const updateCategory = useContext(CateContext)
+    
+    const ApiKeyed = useContext(ApiKeyContext)
+    const updateCategory = useContext(CateContext) || 'null'
 
     useEffect(()=>{
         async function FetchData(){
@@ -25,17 +22,14 @@ export default function NewCardsHolder ()  {
             ).then(
                 data => {
                     setnewsData(data.articles);
-                    // setpageitemNum(data.articles.length)
+                  
                     
                 }
             )
             
-            // let slugpre = linkee.split('v2/')[1]
-            // setsluglink(slugpre.split('&apiKey')[0])
-            // console.log(sluglink)
         }
         FetchData()
-    },[page,updateCategory]);
+    },[page,updateCategory,ApiKeyed]);
 
  
     return (

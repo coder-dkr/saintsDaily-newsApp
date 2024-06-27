@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { CateContext } from '../contexts/CategoryContext';
 import NewCardsHolder from './NewCardsHolder';
 
+
 export default function LowerNav() {
 
   const [activeCat, setactiveCat] = useState('General')
@@ -16,7 +17,6 @@ export default function LowerNav() {
   });
 
   const handleCatChange = (e) =>{
-    // e.preventDefault()
     let newCat = e.target.innerHTML.toLowerCase()
     setactiveCat(newCat)
     window.scrollTo({
