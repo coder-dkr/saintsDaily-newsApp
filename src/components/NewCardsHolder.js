@@ -11,7 +11,8 @@ export default function NewCardsHolder ()  {
     
     const [pageitemNum, setpageitemNum] = useState(12)
     
-    const ApiKeyed = useContext(ApiKeyContext)
+    // const ApiKeyed = useContext(ApiKeyContext)
+    const ApiKeyed = "952f24549e434ae7a323bee25cfd9399";
     const updateCategory = useContext(CateContext) || 'null'
 
     useEffect(()=>{
@@ -22,8 +23,7 @@ export default function NewCardsHolder ()  {
             ).then(
                 data => {
                     setnewsData(data.articles);
-                  
-                    
+                            
                 }
             )
             
@@ -35,10 +35,11 @@ export default function NewCardsHolder ()  {
     return (
       <>
     <div className=" d-flex justify-content-center flex-wrap">
-
+ 
       {typeof newsData!=="undefined" ?
        newsData.map((news,i)=>(
           <NewsCard key={i} tonewsurl={news.url} newsimagesrc={news.urlToImage} newstitle={news.title} newstext={news.description} />
+          
       )) : <>
         <img src="loading.gif" className='my-4 '/>
         
@@ -54,14 +55,14 @@ export default function NewCardsHolder ()  {
             top: 0,
             behavior: 'smooth' 
           });
-    }} type="button" class="btn btn-dark" disabled={page === 0}>Previous</button>
+    }} type="button" className="btn btn-dark" disabled={page === 0}>Previous</button>
     <button onClick={()=>{
         setpage(page+1);
         window.scrollTo({
             top: 0,
             behavior: 'smooth' 
           });
-        }} type="button" class="btn btn-dark" disabled={pageitemNum === 1} >Next</button>
+        }} type="button" className="btn btn-dark" disabled={pageitemNum === 1} >Next</button>
     </div>
 
       </>
